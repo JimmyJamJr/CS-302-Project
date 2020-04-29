@@ -1,8 +1,3 @@
-// Jimson Huang
-// CS 302 - 1001
-// Project 2
-// 2/17/2020
-
 #ifndef STACK_H
 #define STACK_H
 
