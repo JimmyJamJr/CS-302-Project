@@ -1,6 +1,6 @@
 SOURCES=$(shell find . -name "*.cpp")
 OBJECTS=$(SOURCES:%.cpp=%.o)
-TARGET=hw5
+TARGET=final
 
 .PHONY: all
 all: $(TARGET)
