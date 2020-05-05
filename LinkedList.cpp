@@ -109,6 +109,11 @@ void LinkedList<T>::insert(const T & value, int index) {
     if (index == size()) {
         add(value);
     }
+    else if (index == 0) {
+        std::shared_ptr<Node<T> > newNode = std::make_shared<Node<T> >(value);
+        newNode->m_next = m_first;
+        m_first = newNode;
+    }
     else {
         std::shared_ptr<Node<T> > currentNode = m_first;
         for (size_t i = 0; i < index - 1; i++) {

@@ -3,10 +3,7 @@
 #include "Graph.h"
 
 template <class T>
-Graph<T>::Graph()
-{
-
-}
+Graph<T>::Graph() {}
 
 template <class T>
 std::shared_ptr<Vertex<T> > Graph<T>::getVertex(int i) { return vertices[i]; }
@@ -41,18 +38,17 @@ int Graph<T>::verticesLength() const
 }
 
 template <class T>
-void Graph<T>::setupEdges() 
-{  
-	for (int i = 0; i < vertices.size(); i++)
-	{
-
-	}
-}
-
-template <class T>
 double Graph<T>::getCost(int one, int two)
 {
-	
+	if (!vertices[one]->connectedTo(vertices[two]->getValue())) {
+		return -1;
+	}
+	for (int i = 0; i < vertices[one]->getEdgeCount(); i++) {
+		if (vertices[one]->getEdge(i)->getDest() == vertices[two]) {
+			return vertices[one]->getEdge(i)->getCost();
+		}
+	}
+	return -1;
 }
 
 #endif
