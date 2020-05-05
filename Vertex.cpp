@@ -27,4 +27,12 @@ int Vertex<T>::getEdgeCount() const { return edges.size(); }
 template<class T >
 std::shared_ptr<Edge<T> > Vertex<T>::getEdge(int i) const { return edges[i]; }
 
+template<class T>
+bool Vertex<T>::connectedTo(const T value) {
+	for (int i = 0; i < edges.size(); i++) {
+		if (edges[i]->getDest()->m_value == value) return true;
+	}
+	return false;
+}
+
 #endif

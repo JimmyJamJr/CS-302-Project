@@ -22,6 +22,7 @@ public:
 	T getValue() const;
 	int getEdgeCount() const;
 	std::shared_ptr<Edge<T> > getEdge(int i) const;
+	bool connectedTo(const T value);
 
 private:
 	T m_value;
