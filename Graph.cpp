@@ -9,10 +9,20 @@ Graph<T>::Graph()
 }
 
 template <class T>
-Vertex<T>& Graph<T>::getVertex(int i) const { return vertices[i]; }
+std::shared_ptr<Vertex<T> > Graph<T>::getVertex(int i) { return vertices[i]; }
 
 template <class T>
-void Graph<T>::addVertex(const Vertex<T>& v)
+std::shared_ptr<Vertex<T> > Graph<T>::getVertex(const T data) {
+	for (int i = 0; i < vertices.size(); i++) {
+		if (vertices[i]->getValue() == data) {
+			return vertices[i];
+		}
+	}
+	throw std::runtime_error("Vertex with the given data not found");
+}
+
+template <class T>
+void Graph<T>::addVertex(const std::shared_ptr<Vertex<T> > v)
 {
 	vertices.add(v);
 }

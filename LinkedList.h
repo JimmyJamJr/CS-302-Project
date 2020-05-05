@@ -1,6 +1,7 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
+#include <memory>
 #include "Node.h"
 
 template <typename T>
@@ -45,8 +46,8 @@ class LinkedList {
             return os;
         }
     private:
-        Node<T> * m_first;
-        Node<T> * m_last;
+        std::shared_ptr<Node<T> > m_first;
+        std::shared_ptr<Node<T> > m_last;
 };
 
 #include "LinkedList.cpp"

@@ -6,20 +6,20 @@
 template <class T> class Vertex;
 
 template <class T>
-class Edge
+struct Edge
 {
 public:
-	Edge(int cost, Vertex<T>* dest);
+	Edge(int cost, std::shared_ptr<Vertex<T> > dest);
 
-	Vertex<T>* getDest() const;
+	std::shared_ptr<Vertex<T> > getDest() const;
 	int getCost() const;
 
-	void setDest(Vertex<T>* newDest);
+	void setDest(std::shared_ptr<Vertex<T> > newDest);
 	void setCost(int newCost);
 
 private:
 	int cost;
-	Vertex<T>* dest;
+	std::shared_ptr<Vertex<T> > dest;
 };
 
 #include "Edge.cpp"

@@ -2,15 +2,17 @@
 #define NODE_H
 
 #include <iostream>
+#include <memory>
+
 
 template <typename T>
 class Node {
     public:
         Node();
         Node(const T & val);
-        Node(const Node<T> * node);
+        Node(const std::shared_ptr<Node<T> > node);
 
-        Node<T> * m_next;
+        std::shared_ptr<Node<T> > m_next;
         T m_value;
 };
 

@@ -4,10 +4,10 @@
 #include "LinkedList.h"
 
 template <typename T>
-LinkedList<T>::LinkedList() : m_first(NULL), m_last(NULL) {};
+LinkedList<T>::LinkedList() : m_first(nullptr), m_last(nullptr) {};
 
 template <typename T>
-LinkedList<T>::LinkedList(T * arr, size_t size) : m_first(NULL), m_last(NULL) {
+LinkedList<T>::LinkedList(T * arr, size_t size) : m_first(nullptr), m_last(nullptr) {
     for (size_t i = 0; i < size; i++, arr++) {
         add(*arr);
     }
@@ -15,7 +15,7 @@ LinkedList<T>::LinkedList(T * arr, size_t size) : m_first(NULL), m_last(NULL) {
 
 template <typename T>
 LinkedList<T>::LinkedList(const LinkedList<T> & other) {
-    for (Node<T> * n = other.m_first; n != NULL; n = n->m_next) {
+    for (std::shared_ptr<Node<T> > n = other.m_first; n != nullptr; n = n->m_next) {
         add(n->m_value);
     }
 }
@@ -23,7 +23,7 @@ LinkedList<T>::LinkedList(const LinkedList<T> & other) {
 template <typename T>
 LinkedList<T> & LinkedList<T>::operator=(const LinkedList<T> & rhs) {
     clear();
-    for (Node<T> * n = rhs.m_first; n != NULL; n = n->m_next) {
+    for (std::shared_ptr<Node<T> > n = rhs.m_first; n != nullptr; n = n->m_next) {
         add(n->m_value);
     }
     return *this;
@@ -40,7 +40,7 @@ T & LinkedList<T>::at(int index) {
         std::cout << "Index out of bounds \n";
     }
 
-    Node<T> * currentNode = m_first;
+  std::shared_ptr<Node<T> > currentNode = m_first;
     for (size_t i = 0; i < index; i++) {
         currentNode = currentNode->m_next;
     }
@@ -54,7 +54,7 @@ const T & LinkedList<T>::at(int index) const {
         std::cout << "Index out of bounds \n";
     }
 
-    Node<T> * currentNode = m_first;
+    std::shared_ptr<Node<T> > currentNode = m_first;
     for (size_t i = 0; i < index; i++) {
         currentNode = currentNode->m_next;
     }
@@ -77,7 +77,7 @@ int LinkedList<T>::indexOf(const T & value) const {
     if (empty()) return -1;
 
     int i = 0;
-    for (Node<T> * n = m_first; n != NULL; n = n->m_next, i++) {
+    for (std::shared_ptr<Node<T> > n = m_first; n != nullptr; n = n->m_next, i++) {
         if (n->m_value == value) {
             return i;
         }
@@ -88,12 +88,12 @@ int LinkedList<T>::indexOf(const T & value) const {
 template <typename T>
 void LinkedList<T>::add(const T & value) {
     if (size() == 0) {
-        Node<T> * n = new Node<T>(value);
+        std::shared_ptr<Node<T> > n = std::make_shared<Node<T> >(value);
         m_first = n;
         m_last = n;
     }
     else {
-        Node<T> * n = new Node<T>(value);
+        std::shared_ptr<Node<T> > n = std::make_shared<Node<T> >(value);
         m_last->m_next = n;
         m_last = m_last->m_next;
     }
@@ -110,12 +110,12 @@ void LinkedList<T>::insert(const T & value, int index) {
         add(value);
     }
     else {
-        Node<T> * currentNode = m_first;
+        std::shared_ptr<Node<T> > currentNode = m_first;
         for (size_t i = 0; i < index - 1; i++) {
             currentNode = currentNode->m_next;
         }
 
-        Node<T> * newNode = new Node<T>(value);
+        std::shared_ptr<Node<T> > newNode = std::make_shared<Node<T> >(value);
         newNode->m_next = currentNode->m_next;
         currentNode->m_next = newNode;
     }
@@ -131,14 +131,14 @@ T LinkedList<T>::removeAt(int index) {
         return val;
     }
 
-    Node<T> * removedNode;
+    std::shared_ptr<Node<T> > removedNode;
     if (index == 0) {
         removedNode = m_first;
         val = m_first->m_value;
         m_first = m_first->m_next;
     }
     else {
-        Node<T> * currentNode = m_first;
+        std::shared_ptr<Node<T> > currentNode = m_first;
         for (size_t i = 0; i < index - 1; i++) {
             currentNode = currentNode->m_next;
         }
@@ -157,7 +157,7 @@ T LinkedList<T>::removeAt(int index) {
 template <typename T>
 T LinkedList<T>::remove(const T & value) {
     T val = T();
-    Node<T> * removedNode = NULL;
+    std::shared_ptr<Node<T> > removedNode = nullptr;
 
     if (size() == 0) {
         std::cout << "Index out of bounds \n";
@@ -170,12 +170,12 @@ T LinkedList<T>::remove(const T & value) {
         m_first = m_first->m_next;
     }
     else {
-        Node<T> * currentNode = m_first;
-        while (currentNode->m_next != NULL && currentNode->m_next->m_value != value) {
+        std::shared_ptr<Node<T> > currentNode = m_first;
+        while (currentNode->m_next != nullptr && currentNode->m_next->m_value != value) {
             currentNode = currentNode->m_next;
         }
         removedNode = currentNode->m_next;
-        if (removedNode == NULL) {
+        if (removedNode == nullptr) {
             std::cout << value << " could not be found \n";
             return val;
         }
@@ -189,17 +189,14 @@ T LinkedList<T>::remove(const T & value) {
 
 template <typename T>
 void LinkedList<T>::clear() {
-    while (m_first != NULL) {
-        Node<T> * previous = m_first;
-        m_first = m_first->m_next;
-        delete previous;
-    } 
+    m_first = nullptr;
+    m_last = nullptr; 
 }
 
 template <typename T>
 size_t LinkedList<T>::size() const {
     size_t count = 0;
-    for (Node<T> * n = m_first; n != NULL; n = n->m_next, count++);
+    for (std::shared_ptr<Node<T> > n = m_first; n != nullptr; n = n->m_next, count++);
     return count;
 }
 
@@ -216,9 +213,9 @@ bool LinkedList<T>::empty() const {
 template <typename T>
 void LinkedList<T>::serialize(std::ostream & os) const {
     os << "{";
-    for (Node<T> * n = m_first; n != NULL; n = n->m_next) {
+    for (std::shared_ptr<Node<T> > n = m_first; n != nullptr; n = n->m_next) {
         os << n->m_value;
-        if (n->m_next != NULL) {
+        if (n->m_next != nullptr) {
             os << ", ";
         }
     }

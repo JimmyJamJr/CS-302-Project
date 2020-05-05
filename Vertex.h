@@ -1,6 +1,8 @@
 #ifndef VERTEX_H
 #define VERTEX_H
 
+#include <memory>
+
 #include "LinkedList.h"
 #include "Edge.h"
 
@@ -12,18 +14,18 @@ class Vertex
 public:
 	Vertex(T data);
 
-	void addEdge(Edge<T>& newEdge);
+	void addEdge(std::shared_ptr<Edge<T> > newEdge);
 	void clearEdges();
 
 	void setValue(T data);
 
 	T getValue() const;
 	int getEdgeCount() const;
-	Edge<T> getEdge(int i) const;
+	std::shared_ptr<Edge<T> > getEdge(int i) const;
 
 private:
 	T m_value;
-	LinkedList<Edge<T>> edges;
+	LinkedList<std::shared_ptr<Edge<T> > > edges;
 };
 
 #include "Vertex.cpp"

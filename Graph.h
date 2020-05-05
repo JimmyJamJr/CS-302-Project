@@ -11,10 +11,12 @@ public:
 	Graph();
 
 	// Returns the vertex at vertices[i].
-	Vertex<T>& getVertex(int i) const;
+	std::shared_ptr<Vertex<T> > getVertex(int i);
+	// Returns the vertex by its data
+	std::shared_ptr<Vertex<T> > getVertex(const T data);
 
 	// Adds vertex to vertices.
-	void addVertex(const Vertex<T>& v);
+	void addVertex(const std::shared_ptr<Vertex<T> > v);
 	void addVertex(const T data);
 
 	// Returns the length of vertices list.
@@ -27,7 +29,7 @@ public:
 	double getCost(int one, int two);
 
 private:
-	LinkedList<Vertex<T>> vertices;
+	LinkedList<std::shared_ptr<Vertex<T> > > vertices;
 };
 
 #include "Graph.cpp"

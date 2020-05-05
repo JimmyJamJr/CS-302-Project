@@ -4,13 +4,13 @@
 #include "Vertex.h"
 
 template<class T>
-Vertex<T>::Vertex(T data) 
+Vertex<T>::Vertex(T data)
 { 
 	setValue(data);
 }
 
 template<class T>
-void Vertex<T>::addEdge(Edge<T>& newEdge) { edges.add(newEdge); }
+void Vertex<T>::addEdge(std::shared_ptr<Edge<T> >newEdge) { edges.add(newEdge); }
 
 template<class T>
 void Vertex<T>::clearEdges() { edges.clear(); }
@@ -25,6 +25,6 @@ template<class T>
 int Vertex<T>::getEdgeCount() const { return edges.size(); }
 
 template<class T >
-Edge<T> Vertex<T>::getEdge(int i) const { return edges[i]; }
+std::shared_ptr<Edge<T> > Vertex<T>::getEdge(int i) const { return edges[i]; }
 
 #endif
