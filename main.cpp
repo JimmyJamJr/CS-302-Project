@@ -26,12 +26,7 @@ std::pair<LinkedList<std::string>, int> FindCheapestPath(Graph<std::string> & gr
 int main() {
     std::shared_ptr<Graph<std::string> > graph = std::make_shared<Graph<std::string> >();
     createGraph(graph);
-
-    std::cout << graph->getVertex(0)->getValue() << "\n";
-    for (int i = 0; i < graph->getVertex(0)->getEdgeCount(); i++) {
-        std::cout << graph->getVertex(0)->getEdge(i)->getDest()->getValue() << " " << graph->getVertex(0)->getEdge(i)->getCost() << "\n";
-    }
-
+    
     std::pair<LinkedList<std::string>, int> cheapest = FindCheapestPath(*graph);
     std::cout << "\nCheapest Path:\n";
     for (int i = 0; i < cheapest.first.size(); i++) {
@@ -40,6 +35,7 @@ int main() {
     std::cout << "\t - " << cheapest.second << " Miles" << " | " << (float) cheapest.second / MILES_PER_GALLON << " Gallons\n";
 
     std::cout << "Path saved to output.txt" << "\n";
+    return 0;
 }
 
 void createGraph(std::shared_ptr<Graph<std::string> > graph) {
