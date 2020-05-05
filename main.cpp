@@ -4,7 +4,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <ios>
 #include <memory>
 #include <string>
 #include <sstream>
@@ -26,7 +25,7 @@ std::pair<LinkedList<std::string>, int> FindCheapestPath(Graph<std::string> & gr
 int main() {
     std::shared_ptr<Graph<std::string> > graph = std::make_shared<Graph<std::string> >();
     createGraph(graph);
-    
+
     std::pair<LinkedList<std::string>, int> cheapest = FindCheapestPath(*graph);
     std::cout << "\nCheapest Path:\n";
     for (int i = 0; i < cheapest.first.size(); i++) {
@@ -123,7 +122,7 @@ std::pair<LinkedList<std::string>, int> FindCheapestPath(Graph<std::string> & gr
         }
     }
 
-    int minDistance = INT_MAX;
+    int minDistance = 999999;
     LinkedList<std::string> shortestPath;
 
     do {
