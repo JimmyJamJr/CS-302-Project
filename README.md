@@ -6,4 +6,3 @@ Jimson Huang
 Evan Lancaster
 
 Run the program with ./final
-Github Link: https://github.com/JimmyJamJr/CS302Final
