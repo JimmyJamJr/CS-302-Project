@@ -1,5 +1,5 @@
 # CS302Final
-Final Project for CS302
+Final Project for CS302. Implementation of a graph data structure and travelling salesman problem.
 
 Group Members:
 Jimson Huang
